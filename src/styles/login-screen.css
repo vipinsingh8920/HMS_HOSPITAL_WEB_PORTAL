@@ -1,0 +1,3 @@
+.login-page .role-card { will-change: transform; }
+.login-page .login-button { transition: transform .2s ease, box-shadow .2s ease; }
+.login-page .login-button:hover { transform: translateY(-1px); box-shadow: 0 8px 18px #0e8f9138; }

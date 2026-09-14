@@ -1,0 +1,4 @@
+.admin-patient-panel { contain: layout style; }
+.admin-patient-panel .admin-patient-row { transition: background-color .16s ease; }
+.admin-patient-panel .admin-patient-row:focus-visible,
+.admin-patient-panel .patient-tabs button:focus-visible { outline: 2px solid var(--teal); outline-offset: -2px; }
