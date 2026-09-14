@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import { cn } from "@/lib/cn";
 import {
@@ -14,7 +14,10 @@ import {
   CreditCard,
   FileText,
   FlaskConical,
+  HelpCircle,
+  KeyRound,
   LayoutDashboard,
+  LogOut,
   Menu,
   Pill,
   Search,
@@ -66,7 +69,14 @@ export function HmsShell({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [settingsOpen, setSettingsOpen] = useState(false);
+  const [passwordOpen, setPasswordOpen] = useState(false);
+  const [notificationsOpen, setNotificationsOpen] = useState(false);
+  const [helpOpen, setHelpOpen] = useState(false);
+  const [logoutOpen, setLogoutOpen] = useState(false);
+  const [notificationSettings, setNotificationSettings] = useState({ urgent: true, appointments: true, reports: false });
   const config = roleConfigs[role];
 
   const navItems = useMemo(() => config.nav, [config]);
@@ -125,7 +135,33 @@ export function HmsShell({
               })}
             </nav>
 
-            <div className="border-t border-slate-200 p-3">
+            <div className="relative border-t border-slate-200 p-3">
+              {settingsOpen && (
+                <div className="absolute bottom-[calc(100%-0.5rem)] left-3 right-3 z-50 overflow-hidden rounded-2xl border border-slate-200 bg-white p-2 shadow-[0_18px_45px_rgba(15,23,42,0.16)]">
+                  <div className="border-b border-slate-100 px-3 pb-3 pt-2">
+                    <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-400">Signed in as</div>
+                    <div className="mt-1 truncate text-sm font-semibold text-slate-900">{config.name}</div>
+                    <div className="mt-0.5 truncate text-xs text-slate-500">{config.title}</div>
+                  </div>
+                  <button type="button" onClick={() => { setPasswordOpen(true); setSettingsOpen(false); }} className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm text-slate-700 transition hover:bg-teal-50 hover:text-teal-800">
+                    <KeyRound size={16} />
+                    <span>Change password</span>
+                  </button>
+                  <button type="button" onClick={() => { setNotificationsOpen(true); setSettingsOpen(false); }} className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm text-slate-700 transition hover:bg-teal-50 hover:text-teal-800">
+                    <Bell size={16} />
+                    <span>Notification preferences</span>
+                  </button>
+                  <button type="button" onClick={() => { setHelpOpen(true); setSettingsOpen(false); }} className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm text-slate-700 transition hover:bg-teal-50 hover:text-teal-800">
+                    <HelpCircle size={16} />
+                    <span>Help &amp; support</span>
+                  </button>
+                  <div className="my-2 border-t border-slate-100" />
+                  <button type="button" onClick={() => { setLogoutOpen(true); setSettingsOpen(false); }} className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-semibold text-rose-600 transition hover:bg-rose-50">
+                    <LogOut size={16} />
+                    <span>Sign out</span>
+                  </button>
+                </div>
+              )}
               <div className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-2.5 shadow-sm">
                 <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-[#d5eee8] to-[#e9f5f1] text-[10px] font-bold text-[#21635f]">
                   {config.initials}
@@ -134,7 +170,7 @@ export function HmsShell({
                   <div className="truncate text-sm font-medium text-slate-900">{config.name}</div>
                   <div className="truncate text-[11px] text-slate-500">{config.title}</div>
                 </div>
-                <button className="rounded-lg p-1.5 text-slate-600 hover:bg-slate-100" aria-label="Open settings">
+                <button type="button" onClick={() => setSettingsOpen((open) => !open)} className={`rounded-lg p-1.5 text-slate-600 transition hover:bg-slate-100 ${settingsOpen ? "bg-slate-100 text-teal-700" : ""}`} aria-label="Open settings" aria-expanded={settingsOpen}>
                   <Settings size={15} />
                 </button>
               </div>
@@ -193,6 +229,70 @@ export function HmsShell({
           </main>
         </div>
       </div>
+      {notificationsOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/35 px-4 backdrop-blur-sm" role="presentation" onMouseDown={(event) => event.target === event.currentTarget && setNotificationsOpen(false)}>
+          <div className="w-full max-w-lg overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-[0_24px_80px_rgba(15,23,42,0.2)]" role="dialog" aria-modal="true" aria-labelledby="notification-preferences-title">
+            <div className="bg-[linear-gradient(135deg,#173f4a_0%,#28717a_100%)] px-6 py-7 text-white sm:px-8">
+              <div className="flex items-start justify-between gap-4"><div><div className="mb-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-teal-100">Stay informed</div><h2 id="notification-preferences-title" className="text-2xl font-semibold tracking-[-0.04em]">Notification preferences</h2><p className="mt-2 text-sm leading-6 text-white/70">Choose the updates you want to receive in your workspace.</p></div><button type="button" onClick={() => setNotificationsOpen(false)} className="rounded-xl bg-white/10 p-2 text-white transition hover:bg-white/20" aria-label="Close notification preferences"><X size={18} /></button></div>
+            </div>
+            <div className="space-y-2 p-5 sm:p-7">
+              {[
+                { key: "urgent" as const, label: "Urgent care alerts", detail: "Emergency cases, critical incidents, and safety notices." },
+                { key: "appointments" as const, label: "Appointment updates", detail: "Schedule changes, check-ins, and missed appointments." },
+                { key: "reports" as const, label: "Report reminders", detail: "Pending reviews and newly available hospital reports." },
+              ].map((item) => (
+                <label key={item.key} className="flex cursor-pointer items-center justify-between gap-4 rounded-2xl border border-slate-200 p-4 transition hover:border-teal-200 hover:bg-teal-50/50">
+                  <span><span className="block text-sm font-semibold text-slate-800">{item.label}</span><span className="mt-1 block text-xs leading-5 text-slate-500">{item.detail}</span></span>
+                  <span className={`relative h-6 w-11 shrink-0 rounded-full transition ${notificationSettings[item.key] ? "bg-[#28717a]" : "bg-slate-300"}`}><input type="checkbox" className="sr-only" checked={notificationSettings[item.key]} onChange={() => setNotificationSettings((current) => ({ ...current, [item.key]: !current[item.key] }))} /><span className={`absolute top-1 h-4 w-4 rounded-full bg-white shadow-sm transition ${notificationSettings[item.key] ? "left-6" : "left-1"}`} /></span>
+                </label>
+              ))}
+              <div className="flex justify-end border-t border-slate-100 pt-5"><button type="button" onClick={() => setNotificationsOpen(false)} className="rounded-xl bg-[#173f4a] px-4 py-2.5 text-sm font-semibold text-white shadow-[0_6px_14px_rgba(23,63,74,0.16)] transition hover:bg-[#28717a]">Save preferences</button></div>
+            </div>
+          </div>
+        </div>
+      )}
+      {helpOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/35 px-4 backdrop-blur-sm" role="presentation" onMouseDown={(event) => event.target === event.currentTarget && setHelpOpen(false)}>
+          <div className="w-full max-w-lg rounded-3xl border border-slate-200 bg-white p-6 shadow-[0_24px_80px_rgba(15,23,42,0.2)] sm:p-8" role="dialog" aria-modal="true" aria-labelledby="help-support-title">
+            <div className="flex items-start justify-between gap-4"><div><div className="mb-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-teal-700">We are here to help</div><h2 id="help-support-title" className="text-2xl font-semibold tracking-[-0.04em] text-slate-900">Help &amp; support</h2><p className="mt-2 text-sm leading-6 text-slate-500">Find answers or connect with the Veya support team.</p></div><button type="button" onClick={() => setHelpOpen(false)} className="rounded-xl border border-slate-200 p-2 text-slate-500 hover:bg-slate-50" aria-label="Close help and support"><X size={18} /></button></div>
+            <div className="mt-6 grid gap-3 sm:grid-cols-2"><button type="button" onClick={() => setHelpOpen(false)} className="rounded-2xl border border-slate-200 p-4 text-left transition hover:border-teal-200 hover:bg-teal-50/50"><HelpCircle size={19} className="text-teal-700" /><div className="mt-3 text-sm font-semibold text-slate-800">Browse help center</div><div className="mt-1 text-xs leading-5 text-slate-500">Guides for daily hospital workflows.</div></button><button type="button" onClick={() => setHelpOpen(false)} className="rounded-2xl border border-slate-200 p-4 text-left transition hover:border-teal-200 hover:bg-teal-50/50"><Bell size={19} className="text-teal-700" /><div className="mt-3 text-sm font-semibold text-slate-800">Contact support</div><div className="mt-1 text-xs leading-5 text-slate-500">Reach the operations team for assistance.</div></button></div>
+            <div className="mt-5 rounded-2xl bg-[#f1f7f6] p-4 text-xs leading-5 text-slate-600">Support hours: Monday to Saturday, 9:00 AM to 6:00 PM. Include your hospital and workspace role when reporting an issue.</div>
+          </div>
+        </div>
+      )}
+      {logoutOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/45 px-4 backdrop-blur-sm" role="presentation" onMouseDown={(event) => event.target === event.currentTarget && setLogoutOpen(false)}>
+          <div className="w-full max-w-md overflow-hidden rounded-3xl border border-white/70 bg-white shadow-[0_28px_90px_rgba(15,23,42,0.28)]" role="dialog" aria-modal="true" aria-labelledby="logout-title">
+            <div className="bg-[linear-gradient(135deg,#173f4a_0%,#28717a_100%)] px-6 pb-8 pt-7 text-white sm:px-8"><div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/15"><LogOut size={22} /></div><h2 id="logout-title" className="mt-5 text-2xl font-semibold tracking-[-0.04em]">Sign out of Veya?</h2><p className="mt-2 max-w-sm text-sm leading-6 text-white/70">You will return to the secure sign-in screen. Any unsaved work on this page will be lost.</p></div>
+            <div className="flex justify-end gap-3 p-5 sm:p-6"><button type="button" onClick={() => setLogoutOpen(false)} className="rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-600 transition hover:bg-slate-50">Stay signed in</button><button type="button" onClick={() => router.push("/login")} className="rounded-xl bg-rose-600 px-4 py-2.5 text-sm font-semibold text-white shadow-[0_8px_18px_rgba(225,29,72,0.2)] transition hover:bg-rose-700">Sign out</button></div>
+          </div>
+        </div>
+      )}
+      {passwordOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/35 px-4 backdrop-blur-sm" role="presentation" onMouseDown={(event) => event.target === event.currentTarget && setPasswordOpen(false)}>
+          <div className="w-full max-w-md rounded-3xl border border-slate-200 bg-white p-6 shadow-[0_24px_70px_rgba(15,23,42,0.2)] sm:p-8" role="dialog" aria-modal="true" aria-labelledby="change-password-title">
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <div className="mb-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-teal-700">Account security</div>
+                <h2 id="change-password-title" className="text-2xl font-semibold tracking-[-0.04em] text-slate-900">Change password</h2>
+                <p className="mt-2 text-sm leading-6 text-slate-500">Update the password used to access your {config.title.toLowerCase()} workspace.</p>
+              </div>
+              <button type="button" onClick={() => setPasswordOpen(false)} className="rounded-xl border border-slate-200 p-2 text-slate-500 hover:bg-slate-50" aria-label="Close change password dialog">
+                <X size={18} />
+              </button>
+            </div>
+            <form className="mt-6 space-y-4" onSubmit={(event) => { event.preventDefault(); setPasswordOpen(false); }}>
+              <label className="block text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-500">Current password<input required type="password" className="mt-2 h-11 w-full rounded-xl border border-slate-200 px-3 text-sm outline-none transition focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10" /></label>
+              <label className="block text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-500">New password<input required minLength={8} type="password" className="mt-2 h-11 w-full rounded-xl border border-slate-200 px-3 text-sm outline-none transition focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10" /></label>
+              <label className="block text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-500">Confirm new password<input required minLength={8} type="password" className="mt-2 h-11 w-full rounded-xl border border-slate-200 px-3 text-sm outline-none transition focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10" /></label>
+              <div className="flex justify-end gap-3 border-t border-slate-100 pt-5">
+                <button type="button" onClick={() => setPasswordOpen(false)} className="rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-600 hover:bg-slate-50">Cancel</button>
+                <button type="submit" className="rounded-xl bg-[#173f4a] px-4 py-2.5 text-sm font-semibold text-white shadow-[0_6px_14px_rgba(23,63,74,0.16)] transition hover:bg-[#28717a]">Update password</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
