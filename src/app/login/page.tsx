@@ -37,8 +37,8 @@ export default function LoginPage() {
       <div className="relative mx-auto flex min-h-screen max-w-[1500px] items-center justify-between gap-12 px-5 py-6 sm:px-8 lg:px-14">
         <section className="hidden max-w-xl self-stretch flex-col justify-between py-5 text-white lg:flex">
           <div className="flex items-center gap-3">
-            <div className="grid h-11 w-11 place-items-center rounded-2xl bg-[#4fb9aa] text-lg font-bold shadow-[0_10px_30px_rgba(79,185,170,0.35)]">V</div>
-            <div><div className="text-xl font-semibold tracking-tight">Veya</div><div className="text-[9px] font-semibold tracking-[0.28em] text-teal-100/75">HOSPITAL OS</div></div>
+            <div className="grid h-11 w-11 place-items-center rounded-2xl bg-[#4fb9aa] text-lg font-bold shadow-[0_10px_30px_rgba(79,185,170,0.35)]">A</div>
+            <div><div className="text-xl font-semibold tracking-tight">appziora</div><div className="text-[9px] font-semibold tracking-[0.28em] text-teal-100/75">HMS</div></div>
           </div>
           <div className="max-w-md pb-8">
             <div className="mb-4 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-teal-200"><span className="h-2 w-2 rounded-full bg-teal-300" /> Royal Care Hospital</div>
@@ -65,7 +65,7 @@ export default function LoginPage() {
               </div>
             ) : (
               <form className="space-y-5" onSubmit={(event) => { event.preventDefault(); setResetSent(true); }}>
-                <div className="rounded-2xl bg-[#f3f8f6] p-4"><div className="flex items-start gap-3"><div className="mt-0.5 text-[#168c78]"><Mail size={18} /></div><p className="text-sm leading-6 text-slate-600">Enter the work email linked to your Veya account and we&apos;ll send you a secure password reset link.</p></div></div>
+                <div className="rounded-2xl bg-[#f3f8f6] p-4"><div className="flex items-start gap-3"><div className="mt-0.5 text-[#168c78]"><Mail size={18} /></div><p className="text-sm leading-6 text-slate-600">Enter the work email linked to your appziora HMS account and we&apos;ll send you a secure password reset link.</p></div></div>
                 <label className="block text-[10px] font-bold uppercase tracking-[0.14em] text-slate-500">Work email<input required type="email" value={resetEmail} onChange={(event) => setResetEmail(event.target.value)} className="mt-2 h-12 w-full rounded-xl border border-slate-200 bg-white px-4 text-sm font-normal tracking-normal text-slate-900 outline-none transition focus:border-[#2baf97] focus:ring-4 focus:ring-[#2baf9715]" placeholder="name@royalcare.in" /></label>
                 <button type="submit" className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#176c73] text-sm font-semibold text-white shadow-[0_10px_24px_rgba(23,108,115,0.25)] transition hover:bg-[#125860]">Send reset link <ArrowRight size={16} /></button>
                 <button type="button" onClick={() => setForgotPassword(false)} className="flex w-full items-center justify-center gap-2 text-sm font-semibold text-slate-500 transition hover:text-[#168c78]"><ArrowLeft size={15} /> Back to sign in</button>

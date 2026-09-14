@@ -8,7 +8,7 @@ export default function Loading() {
           <Activity className="h-4 w-4 animate-pulse" />
         </div>
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-teal-700">Veya</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-teal-700">appziora</p>
           <p className="mt-1 text-sm font-medium text-slate-700">Loading your workspace...</p>
         </div>
       </div>

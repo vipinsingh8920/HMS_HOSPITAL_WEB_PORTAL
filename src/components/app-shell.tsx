@@ -24,7 +24,7 @@ export function AppShell({ children, role, onSignOut, activeNav, onNavigate }: {
       <aside className={`sidebar ${open ? "sidebar-open" : ""}`}>
         <div className="brand-lockup">
           <div className="brand-mark"><Activity size={19} strokeWidth={2.5} /></div>
-          <div><strong>Veya</strong><span>HOSPITAL OS</span></div>
+          <div><strong>appziora</strong><span>HMS</span></div>
           <button className="sidebar-close" onClick={() => setOpen(false)} aria-label="Close navigation"><X size={18} /></button>
         </div>
         <div className="hospital-switcher">

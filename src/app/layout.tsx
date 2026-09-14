@@ -3,12 +3,12 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Veya | Hospital Operations",
-    template: "%s | Veya",
+    default: "appziora HMS | Hospital Operations",
+    template: "%s | appziora HMS",
   },
   description: "A calm, connected workspace for modern hospital teams.",
   metadataBase: new URL("https://example.com"),
-  applicationName: "Veya",
+  applicationName: "appziora HMS",
   icons: {
     icon: "/favicon.ico",
   },

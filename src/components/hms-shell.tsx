@@ -88,10 +88,10 @@ export function HmsShell({
           <div className="flex h-full flex-col">
             <div className="flex items-center justify-between border-b border-slate-200 px-4 py-4">
               <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#176c73] to-[#2d9886] text-sm font-bold text-white shadow-lg shadow-[#176c73]/25">V</div>
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#176c73] to-[#2d9886] text-sm font-bold text-white shadow-lg shadow-[#176c73]/25">A</div>
                 <div>
-                  <div className="text-lg font-semibold tracking-tight text-slate-900">Veya</div>
-                  <div className="text-[10px] tracking-[0.28em] text-slate-500">HOSPITAL OS</div>
+                  <div className="text-lg font-semibold tracking-tight text-slate-900">appziora</div>
+                  <div className="text-[10px] tracking-[0.28em] text-slate-500">HMS</div>
                 </div>
               </div>
               <button className="rounded-lg p-2 text-slate-600 lg:hidden" onClick={() => setSidebarOpen(false)} aria-label="Close sidebar">
@@ -254,7 +254,7 @@ export function HmsShell({
       {helpOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/35 px-4 backdrop-blur-sm" role="presentation" onMouseDown={(event) => event.target === event.currentTarget && setHelpOpen(false)}>
           <div className="w-full max-w-lg rounded-3xl border border-slate-200 bg-white p-6 shadow-[0_24px_80px_rgba(15,23,42,0.2)] sm:p-8" role="dialog" aria-modal="true" aria-labelledby="help-support-title">
-            <div className="flex items-start justify-between gap-4"><div><div className="mb-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-teal-700">We are here to help</div><h2 id="help-support-title" className="text-2xl font-semibold tracking-[-0.04em] text-slate-900">Help &amp; support</h2><p className="mt-2 text-sm leading-6 text-slate-500">Find answers or connect with the Veya support team.</p></div><button type="button" onClick={() => setHelpOpen(false)} className="rounded-xl border border-slate-200 p-2 text-slate-500 hover:bg-slate-50" aria-label="Close help and support"><X size={18} /></button></div>
+            <div className="flex items-start justify-between gap-4"><div><div className="mb-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-teal-700">We are here to help</div><h2 id="help-support-title" className="text-2xl font-semibold tracking-[-0.04em] text-slate-900">Help &amp; support</h2><p className="mt-2 text-sm leading-6 text-slate-500">Find answers or connect with the appziora HMS support team.</p></div><button type="button" onClick={() => setHelpOpen(false)} className="rounded-xl border border-slate-200 p-2 text-slate-500 hover:bg-slate-50" aria-label="Close help and support"><X size={18} /></button></div>
             <div className="mt-6 grid gap-3 sm:grid-cols-2"><button type="button" onClick={() => setHelpOpen(false)} className="rounded-2xl border border-slate-200 p-4 text-left transition hover:border-teal-200 hover:bg-teal-50/50"><HelpCircle size={19} className="text-teal-700" /><div className="mt-3 text-sm font-semibold text-slate-800">Browse help center</div><div className="mt-1 text-xs leading-5 text-slate-500">Guides for daily hospital workflows.</div></button><button type="button" onClick={() => setHelpOpen(false)} className="rounded-2xl border border-slate-200 p-4 text-left transition hover:border-teal-200 hover:bg-teal-50/50"><Bell size={19} className="text-teal-700" /><div className="mt-3 text-sm font-semibold text-slate-800">Contact support</div><div className="mt-1 text-xs leading-5 text-slate-500">Reach the operations team for assistance.</div></button></div>
             <div className="mt-5 rounded-2xl bg-[#f1f7f6] p-4 text-xs leading-5 text-slate-600">Support hours: Monday to Saturday, 9:00 AM to 6:00 PM. Include your hospital and workspace role when reporting an issue.</div>
           </div>
@@ -263,7 +263,7 @@ export function HmsShell({
       {logoutOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/45 px-4 backdrop-blur-sm" role="presentation" onMouseDown={(event) => event.target === event.currentTarget && setLogoutOpen(false)}>
           <div className="w-full max-w-md overflow-hidden rounded-3xl border border-white/70 bg-white shadow-[0_28px_90px_rgba(15,23,42,0.28)]" role="dialog" aria-modal="true" aria-labelledby="logout-title">
-            <div className="bg-[linear-gradient(135deg,#173f4a_0%,#28717a_100%)] px-6 pb-8 pt-7 text-white sm:px-8"><div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/15"><LogOut size={22} /></div><h2 id="logout-title" className="mt-5 text-2xl font-semibold tracking-[-0.04em]">Sign out of Veya?</h2><p className="mt-2 max-w-sm text-sm leading-6 text-white/70">You will return to the secure sign-in screen. Any unsaved work on this page will be lost.</p></div>
+            <div className="bg-[linear-gradient(135deg,#173f4a_0%,#28717a_100%)] px-6 pb-8 pt-7 text-white sm:px-8"><div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/15"><LogOut size={22} /></div><h2 id="logout-title" className="mt-5 text-2xl font-semibold tracking-[-0.04em]">Sign out of appziora HMS?</h2><p className="mt-2 max-w-sm text-sm leading-6 text-white/70">You will return to the secure sign-in screen. Any unsaved work on this page will be lost.</p></div>
             <div className="flex justify-end gap-3 p-5 sm:p-6"><button type="button" onClick={() => setLogoutOpen(false)} className="rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-600 transition hover:bg-slate-50">Stay signed in</button><button type="button" onClick={() => router.push("/login")} className="rounded-xl bg-rose-600 px-4 py-2.5 text-sm font-semibold text-white shadow-[0_8px_18px_rgba(225,29,72,0.2)] transition hover:bg-rose-700">Sign out</button></div>
           </div>
         </div>
