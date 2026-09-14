@@ -1,4 +1,4 @@
-import { ReceptionAdmissionsPage } from "@/components/hms-role-pages";
+import { ReceptionAdmissionsPage } from "@/components/reception-admissions-page";
 
 export default function Page() {
   return <ReceptionAdmissionsPage />;

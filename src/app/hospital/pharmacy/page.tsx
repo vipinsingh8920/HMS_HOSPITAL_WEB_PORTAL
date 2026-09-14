@@ -1,5 +1,5 @@
-import { HospitalPharmacyPage } from "@/components/hms-role-pages";
+import { PharmacyModulePage } from "@/components/pharmacy-module-page";
 
 export default function Page() {
-  return <HospitalPharmacyPage />;
+  return <PharmacyModulePage />;
 }

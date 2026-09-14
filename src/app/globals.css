@@ -3,9 +3,68 @@
 @import "../styles/dashboard-widgets.css";
 @import "../styles/patient-management.css";
 
-:root { --ink: #19343b; --muted: #71878d; --line: #dfeae8; --canvas: #f3f7f6; --teal: #176c73; --navy: #123f47; --mint: #dcefe9; --blue: #e6eff5; --amber: #f8edd9; --rose: #f7e6e3; }
-* { box-sizing: border-box; }
-body { margin: 0; background: var(--canvas); color: var(--ink); font-family: Arial, Helvetica, sans-serif; }
+:root {
+	--ink: #18343d;
+	--muted: #71878d;
+	--line: #dfeae8;
+	--canvas: #f3f7f6;
+	--panel: rgba(255, 255, 255, 0.86);
+	--teal: #176c73;
+	--navy: #123f47;
+	--mint: #dcefe9;
+	--blue: #e6eff5;
+	--amber: #f8edd9;
+	--rose: #f7e6e3;
+	--shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.06);
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	min-height: 100vh;
+	background: radial-gradient(circle at top, #f7fbfa 0%, #edf5f3 38%, #f1f4f5 100%);
+	color: var(--ink);
+	font-family: "Inter", "Segoe UI", sans-serif;
+}
+
+button,
+input,
+select,
+textarea {
+	font: inherit;
+}
+
+button {
+	cursor: pointer;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+img {
+	display: block;
+	max-width: 100%;
+}
+
+::selection {
+	background: rgba(23, 108, 115, 0.14);
+	color: var(--ink);
+}
+
+.app-shell,
+.page-shell,
+.dashboard-shell {
+	background: radial-gradient(circle at top, #f7fbfa 0%, #edf5f3 38%, #f1f4f5 100%);
+}
 .login-page { min-height: 100vh; display: grid; grid-template-columns: minmax(420px, .9fr) minmax(540px, 1.1fr); background: #f4f7f5; }
 .login-story { position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; padding: 42px 9vw 42px 8vw; color: #effaf6; background: #103b49; }
 .login-story:after { content: ""; position: absolute; width: 430px; height: 430px; right: -180px; bottom: -150px; border: 1px solid #5ab8a655; border-radius: 50%; box-shadow: 0 0 0 34px #5ab8a61b, 0 0 0 68px #5ab8a610; }

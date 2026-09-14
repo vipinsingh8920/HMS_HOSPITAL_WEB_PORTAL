@@ -1,5 +1,5 @@
-import { ReceptionDashboardPage } from "@/components/hms-role-pages";
+import { ReceptionModulePage } from "@/components/reception-module-page";
 
 export default function Page() {
-  return <ReceptionDashboardPage />;
+  return <ReceptionModulePage />;
 }

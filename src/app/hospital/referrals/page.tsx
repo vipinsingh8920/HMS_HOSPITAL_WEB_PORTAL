@@ -1,5 +1,5 @@
-import { HospitalReferralsPage } from "@/components/hms-role-pages";
+import { ReferralsModulePage } from "@/components/referrals-module-page";
 
 export default function Page() {
-  return <HospitalReferralsPage />;
+  return <ReferralsModulePage />;
 }

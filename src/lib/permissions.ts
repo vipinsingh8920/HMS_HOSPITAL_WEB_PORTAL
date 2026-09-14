@@ -79,6 +79,7 @@ export const roleConfigs: Record<RoleKey, RoleConfig> = {
       { label: "Dashboard", href: "/reception/dashboard", icon: "LayoutDashboard", permission: "dashboard" },
       { label: "Patients", href: "/reception/patients", icon: "Users", permission: "patients" },
       { label: "Appointments", href: "/reception/appointments", icon: "CalendarDays", permission: "appointments" },
+      { label: "Admissions", href: "/reception/admissions", icon: "ClipboardList", permission: "patients" },
       { label: "Billing", href: "/reception/billing", icon: "WalletCards", permission: "billing" },
     ],
   },

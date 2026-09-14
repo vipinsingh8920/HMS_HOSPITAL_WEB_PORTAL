@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useMemo, useState } from "react";
+import { cn } from "@/lib/cn";
 import {
   Activity,
   AlertTriangle,
@@ -111,7 +112,11 @@ export function HmsShell({
                     key={item.href}
                     href={item.href}
                     onClick={() => setSidebarOpen(false)}
-                    className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-all ${active ? "bg-gradient-to-r from-[#176c73] to-[#258979] text-white shadow-md shadow-[#176c73]/20" : "text-slate-700 hover:bg-white hover:text-slate-900"}`}
+                    aria-current={active ? "page" : undefined}
+                    className={cn(
+                      "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-all",
+                      active ? "bg-gradient-to-r from-[#176c73] to-[#258979] !text-white shadow-md shadow-[#176c73]/20 [&_*]:!text-white" : "text-slate-700 hover:bg-white hover:text-slate-900",
+                    )}
                   >
                     <Icon size={17} />
                     <span className="flex-1">{item.label}</span>

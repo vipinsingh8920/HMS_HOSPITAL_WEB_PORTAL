@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Activity, ArrowRight, Check, LockKeyhole, Stethoscope, Users, FlaskConical } from "lucide-react";
 import { roleOptions } from "@/lib/permissions";
-import type { RoleKey } from "@/lib/types";
 
 type LoginRole = "HOSPITAL_ADMIN" | "DOCTOR" | "RECEPTIONIST" | "LAB_MANAGER";
 
